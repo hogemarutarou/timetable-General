@@ -1866,13 +1866,17 @@ function renderEditToolbar(){
     tb.innerHTML=`<div class="edit-toolbar" style="background:var(--accent-soft);border-color:#cfe6ee">
       <span class="et-label" style="color:var(--accent)">${termLabel("early")}</span>
       <span style="font-size:.82rem;color:var(--ink-soft)">学年とコースを選ぶと、表のマスをクリックして授業を編集できます。</span>
-      <button class="btn ghost" id="checkAll" style="margin-left:auto">整合チェック</button>
+      <button class="btn ghost" id="toggleProgress" style="margin-left:auto">入力状況</button>
+      <button class="btn ghost" id="checkAll">整合チェック</button>
+      <button class="btn ghost" id="printClass">印刷</button>
       <button class="btn ok" id="exportEarlyXlsx">Excel出力</button>
       <button class="btn ghost" id="yearMenuBtnE">年度メニュー</button>
       <button class="btn ghost" id="worldUrlBtnE">コースURL一覧</button>
       <button class="btn danger-ghost" id="resetEarly">${esc(termLabel("early"))}データを消去</button>
     </div><div id="progressPanel"></div><div id="checkPanel"></div>`;
     document.getElementById("exportEarlyXlsx").onclick=exportEarlyExcel;
+    document.getElementById("toggleProgress").onclick=()=>{progressOpen=!progressOpen;if(progressOpen)checkOpen=false;renderProgress();renderCheck();};
+    document.getElementById("printClass").onclick=()=>printTimetable("class");
     document.getElementById("checkAll").onclick=()=>{checkOpen=!checkOpen;if(checkOpen)progressOpen=false;renderProgress();renderCheck();};
     const ym=document.getElementById("yearMenuBtnE");if(ym)ym.onclick=openYearMenu;
     const wu=document.getElementById("worldUrlBtnE");if(wu)wu.onclick=exportWorldUrls;
@@ -1882,7 +1886,7 @@ function renderEditToolbar(){
       if(confirm(t+"に登録したデータをすべて消去します。\n（学生別の個別時間割は消えません）\n\nこの操作は元に戻せません。よろしいですか？")){
         earlyRecords=[];saveEarlyEdits();renderClass();
         setSaved(t+"データを消去しました");}};
-    renderCheck();
+    renderProgress();renderCheck();
     return;
   }
   tb.innerHTML=`<div class="edit-toolbar">
@@ -1892,15 +1896,11 @@ function renderEditToolbar(){
     <button class="btn ghost" id="checkAll">整合チェック</button>
     <button class="btn ghost" id="printClass">印刷</button>
     <button class="btn ok" id="exportXlsx">Excel出力</button>
-    <button class="btn ghost" id="exportJson">JSON出力</button>
-    <button class="btn ghost" id="importJson">JSON読込</button>
     <button class="btn ghost" id="yearMenuBtnL">年度メニュー</button>
     <button class="btn ghost" id="worldUrlBtnL">コースURL一覧</button>
     <button class="btn danger-ghost" id="resetLate">${esc(termLabel("late"))}データを消去</button>
   </div><div id="progressPanel"></div><div id="checkPanel"></div>`;
   document.getElementById("exportXlsx").onclick=exportExcel;
-  document.getElementById("exportJson").onclick=exportJson;
-  document.getElementById("importJson").onclick=importClassJson;
   document.getElementById("resetLate").onclick=()=>{
     const t=termLabel("late");
     if(confirm(t+"に登録したデータをすべて消去します。\n（学生別の個別時間割は消えません）\n\nこの操作は元に戻せません。よろしいですか？")){
@@ -1918,11 +1918,12 @@ function renderProgress(){
   const panel=document.getElementById("progressPanel");if(!panel)return;
   if(!progressOpen){panel.innerHTML="";return;}
   // 学年×コースのマトリクス。各セルは登録コマ数。クリックでそのコースへ移動
-  const grades=[1,2,3,4];
+  // 表示中の学期のデータを対象にする
+  const grades=gradeList();
   // 全コース短縮名（出現順）
   const allShort=[];
   Object.values(OPT.world_by_grade).forEach(arr=>arr.slice().sort((a,b)=>worldRank(a)-worldRank(b)).forEach(w=>{const s=worldShortFull(w);if(!allShort.includes(s))allShort.push(s);}));
-  function cellCount(g,wShort){return lateRecords.filter(r=>r.grade===g&&worldShortFull(r.world)===wShort).length;}
+  function cellCount(g,wShort){return classData().filter(r=>r.grade===g&&worldShortFull(r.world)===wShort).length;}
   function exists(g,wShort){return (OPT.world_by_grade[String(g)]||[]).some(w=>worldShortFull(w)===wShort);}
   let total=0,filled=0;
   let thead='<tr><th class="pg-corner">学年＼コース</th>'+allShort.map(w=>`<th>${esc(w)}</th>`).join("")+'<th class="pg-sum">計</th></tr>';
