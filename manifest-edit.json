@@ -1,0 +1,30 @@
+{
+  "name": "時間割ツール（編集）",
+  "short_name": "時間割編集",
+  "description": "学校の時間割を見る・編集するツール",
+  "lang": "ja",
+  "id": "/edit",
+  "start_url": "/edit",
+  "scope": "/edit",
+  "display": "standalone",
+  "background_color": "#f4f6f9",
+  "theme_color": "#7a4ea8",
+  "icons": [
+    {
+      "src": "/icon-edit-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-edit-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-edit-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
