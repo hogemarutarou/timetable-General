@@ -485,6 +485,123 @@
     .edit-toolbar .btn{min-width:100%}
     table.week{min-width:500px}
   }
+
+  /* ===== 設定画面（カード式・フォーム調） ===== */
+  #configView{background:#F1F3F4;margin:-2px -2px 0;padding:20px 14px 40px;border-radius:12px}
+  .cfg-shell{max-width:760px;margin:0 auto}
+  .cfg-nav{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:thin}
+  .cfg-nav button{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    border:1px solid #DADCE0;background:#fff;border-radius:22px;padding:8px 15px;
+    font:inherit;font-size:.85rem;font-weight:600;color:#5F6368;cursor:pointer;transition:.14s}
+  .cfg-nav button:hover{background:#F8F9FA;border-color:#C6C9CD}
+  .cfg-nav button.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 1px 4px rgba(11,110,143,.3)}
+  .cfg-nav .nv-sum{font-size:.72rem;opacity:.7;font-weight:500}
+  .cfg-nav .nv-dot{width:7px;height:7px;border-radius:50%;background:#F5A623;flex:none;display:none}
+  .cfg-nav button.dirty .nv-dot{display:block}
+  /* カード（Googleフォームの設問カードに相当） */
+  .fcard{background:#fff;border:1px solid #DADCE0;border-radius:10px;padding:22px 24px;margin-bottom:14px;
+    border-left:5px solid transparent;transition:.14s}
+  .fcard:focus-within{border-left-color:var(--accent);box-shadow:0 1px 6px rgba(60,64,67,.18)}
+  .fcard-t{font-size:1.12rem;font-weight:600;color:#202124;margin:0 0 6px}
+  .fcard-d{font-size:.83rem;color:#5F6368;line-height:1.75;margin-bottom:20px}
+  /* 下線だけの入力欄 */
+  .ff{margin-bottom:20px}
+  .ff:last-child{margin-bottom:0}
+  .ff>label{display:block;font-size:.76rem;color:#5F6368;font-weight:600;margin-bottom:5px}
+  .ff input[type=text],.ff select,.ff textarea{
+    width:100%;border:none;border-bottom:1px solid #DADCE0;border-radius:0;background:transparent;
+    padding:7px 2px;font:inherit;font-size:.95rem;color:#202124;transition:.14s}
+  .ff input[type=text]:focus,.ff select:focus,.ff textarea:focus{outline:none;border-bottom:2px solid var(--accent);padding-bottom:6px}
+  .ff input[type=text]::placeholder,.ff textarea::placeholder{color:#BDC1C6}
+  .ff textarea{min-height:120px;resize:vertical;line-height:1.7;border:1px solid #DADCE0;border-radius:8px;padding:10px 12px}
+  .ff textarea:focus{border:2px solid var(--accent);padding:9px 11px}
+  .ff select{appearance:none;background:transparent;cursor:pointer}
+  .ff-row{display:grid;gap:18px;grid-template-columns:1fr 1fr}
+  .ff-row .ff{margin-bottom:0}
+  /* 選択チップ */
+  .cfg-toggles{display:flex;gap:8px;flex-wrap:wrap}
+  .cfg-tg{border:1px solid #DADCE0;border-radius:20px;padding:7px 16px;cursor:pointer;user-select:none;
+    font-size:.86rem;font-weight:600;color:#5F6368;background:#fff;transition:.14s}
+  .cfg-tg:hover{background:#F8F9FA}
+  .cfg-tg.on{background:var(--accent-soft,#E4F0F5);border-color:var(--accent);color:var(--accent)}
+  /* 追加ボタン */
+  .cfg-add{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:4px;
+    background:#fff;color:var(--accent);border:1px dashed #B9C0C6;border-radius:10px;
+    padding:14px;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.14s}
+  .cfg-add:hover{background:#F8FBFC;border-color:var(--accent)}
+  /* 時限テーブル */
+  .cfg-ptable{width:100%;border-collapse:collapse;font-size:.9rem}
+  .cfg-ptable th{color:#5F6368;font-size:.72rem;padding:0 10px 8px 0;text-align:left;font-weight:600;border-bottom:1px solid #E8EAED}
+  .cfg-ptable td{border-bottom:1px solid #F1F3F4;padding:9px 10px 9px 0;vertical-align:middle}
+  .cfg-ptable input[type=time]{border:none;border-bottom:1px solid #DADCE0;background:transparent;
+    padding:5px 2px;font:inherit;font-size:.92rem;color:#202124}
+  .cfg-ptable input[type=time]:focus{outline:none;border-bottom:2px solid var(--accent)}
+  .cfg-ptable .pn{font-weight:600;color:#202124;white-space:nowrap}
+  .iconbtn{background:transparent;border:none;color:#80868B;cursor:pointer;border-radius:50%;
+    width:30px;height:30px;font-size:.82rem;transition:.14s;line-height:1}
+  .iconbtn:hover{background:#F1F3F4;color:#202124}
+  .iconbtn.dg:hover{background:#FCE8E6;color:#C5221F}
+  /* コースカード */
+  .ccard{border:1px solid #DADCE0;border-radius:10px;margin-bottom:12px;overflow:hidden;background:#fff}
+  .ccard-head{display:flex;align-items:center;gap:10px;padding:11px 14px;font-weight:600;font-size:.95rem}
+  .ccard-head .ch-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ccard-head .ch-cnt{font-size:.74rem;opacity:.85;font-weight:500}
+  .ccard-head .iconbtn{color:inherit;opacity:.8}
+  .ccard-head .iconbtn:hover{background:rgba(255,255,255,.24);color:inherit;opacity:1}
+  .ccard-body{padding:18px}
+  .ccard-body .ff-row{margin-bottom:18px}
+  .swatch{display:flex;align-items:center;gap:10px}
+  .swatch input[type=color]{width:46px;height:34px;border:1px solid #DADCE0;border-radius:6px;background:#fff;padding:2px;cursor:pointer}
+  .swatch span{font-size:.78rem;color:#5F6368;font-family:monospace}
+  /* プレビュー */
+  .cfg-prev{border:1px solid #E8EAED;border-radius:8px;overflow:hidden;font-size:.74rem;margin-top:6px}
+  .cfg-prev .pv-h{display:flex}
+  .cfg-prev .pv-h>div{flex:1;padding:6px 4px;text-align:center;font-weight:700}
+  .cfg-prev .pv-h>div.pv-corner{flex:none;width:58px}
+  .cfg-prev .pv-b{display:flex}
+  .cfg-prev .pv-b .pv-side{width:58px;padding:8px 4px;text-align:center;font-weight:700;flex:none}
+  .cfg-prev .pv-b .pv-cell{flex:1;padding:8px 10px;background:#fff;color:#5F6368}
+  /* 教室タグ */
+  .chipbox{border:1px solid #DADCE0;border-radius:10px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;background:#fff;min-height:56px}
+  .chipbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .rchip{display:inline-flex;align-items:center;gap:5px;border-radius:18px;padding:6px 6px 6px 14px;
+    font-size:.86rem;font-weight:600;background:#F1F3F4;color:#3C4043;border:1px solid transparent}
+  .rchip.sp{background:#F3E8FD;color:#5B3B7A;border-color:#E5D4F5}
+  .rchip .rc-n{font-size:.68rem;opacity:.6;font-weight:500}
+  .rchip .rc-sp,.rchip .rc-x,.rchip .rc-mv{cursor:pointer;user-select:none;line-height:1}
+  .rchip .rc-sp{font-size:.66rem;opacity:.75;border:1px solid currentColor;border-radius:4px;padding:1px 4px}
+  .rchip .rc-sp:hover{opacity:1}
+  .rchip .rc-mv{opacity:.4;font-size:.66rem}
+  .rchip .rc-mv:hover{opacity:.85}
+  .rchip .rc-x{opacity:.5;font-weight:700;padding:0 4px;font-size:.95rem}
+  .rchip .rc-x:hover{opacity:1;color:#C5221F}
+  .chipbox input{border:none;outline:none;font:inherit;font-size:.92rem;flex:1;min-width:150px;padding:6px 4px;background:transparent}
+  /* 保存バー */
+  .cfg-save{display:flex;gap:12px;align-items:center;position:sticky;bottom:0;z-index:5;
+    background:#F1F3F4;padding:14px 0 4px;margin-top:6px;border-top:1px solid #E0E2E4}
+  .cfg-err{color:#C5221F;font-size:.84rem;font-weight:600}
+  .cfg-dirtynote{font-size:.8rem;color:#996A00;font-weight:600}
+  @media (max-width:700px){
+    #configView{padding:14px 8px 30px}
+    .fcard{padding:18px 16px}
+    .ff-row{grid-template-columns:1fr;gap:16px}
+  }
+  /* 年度案内・準備中の全画面表示 */
+  #yearNotice{display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#1E5B3C 0%,#134129 100%);align-items:center;justify-content:center;padding:24px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #yearNotice .yn-card{max-width:440px;width:100%;background:#fff;border-radius:18px;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  #yearNotice .yn-badge{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.35em;color:#1E5B3C;font-size:1.1rem;margin-bottom:20px}
+  #yearNotice .yn-title{font-size:1.25rem;font-weight:800;color:#16323F;line-height:1.5;margin-bottom:16px}
+  #yearNotice .yn-msg{font-size:1rem;line-height:1.8;color:#1E5B3C;font-weight:600;margin-bottom:16px}
+  #yearNotice .yn-sub{font-size:.85rem;line-height:1.8;color:#5A6B7A}
+  /* セットアップ */
+  .setup-overlay{display:none;position:fixed;inset:0;z-index:9998;background:#F1F3F4;overflow:auto;padding:0}
+  .setup-overlay.show{display:block}
+  .setup-card{max-width:760px;margin:0 auto;padding:0 14px 40px}
+  .setup-head{background:#fff;border:1px solid #DADCE0;border-top:8px solid var(--accent);
+    border-radius:10px;padding:26px 24px;margin:24px 0 14px}
+  .setup-badge{font-family:"Cinzel",serif;letter-spacing:.3em;color:var(--accent);font-weight:700;font-size:.76rem}
+  .setup-head h2{margin:8px 0 10px;font-size:1.6rem;color:#202124;font-weight:500}
+  .setup-head p{font-size:.88rem;color:#5F6368;line-height:1.8;margin:0}
 </style>
 </head>
 <body>
@@ -498,7 +615,7 @@
   <span class="integ-badge" id="integBadge" style="display:none"></span>
   <button class="btn ghost btn-sm" id="syncReloadBtn" style="display:none;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4)">最新に更新</button>
   <span class="viewer-tag" id="viewerTag" style="display:none">閲覧版</span>
-  <span class="app-ver">v26</span>
+  <span class="app-ver">汎用v1</span>
   <span class="now" id="nowLabel"></span>
   <span class="saved" id="savedLabel"></span>
 </div></header>
@@ -951,8 +1068,8 @@ function cfgReadCurrent(){
     CFGD.periods=[...document.querySelectorAll("#cfgPeriods tr[data-i]")].map((row,i)=>({
       n:i+1,start:row.querySelector(".p-start").value||"09:00",end:row.querySelector(".p-end").value||"10:30"}));
   }
-  if(CFG_SEC==="courses"&&document.querySelector("#cfgCourses .cfg-card")){
-    CFGD.courses=[...document.querySelectorAll("#cfgCourses .cfg-card")].map(card=>{
+  if(CFG_SEC==="courses"&&document.querySelector("#cfgCourses .ccard")){
+    CFGD.courses=[...document.querySelectorAll("#cfgCourses .ccard")].map(card=>{
       const k=card.dataset.key,old=(CFGD.courses||[]).find(c=>c.key===k)||{};
       return {key:k,
         short:card.querySelector(".c-short").value.trim(),
@@ -987,18 +1104,18 @@ function renderCfg(){
   const setup=(cfgHostId()==="setupBody");
   const dirtyCount=Object.keys(CFG_DIRTY).length;
   host.innerHTML=
-    '<div class="cfg-wrap">'+
+    '<div class="cfg-shell">'+
       '<nav class="cfg-nav">'+CFG_SECS.map(sc=>
         `<button data-sec="${sc.id}" class="${sc.id===CFG_SEC?"on":""}${CFG_DIRTY[sc.id]?" dirty":""}">`+
         `<span class="nv-dot"></span>${sc.label}<span class="nv-sum">${esc(cfgSummary(sc.id))}</span></button>`).join("")+
       '</nav>'+
-      '<div class="cfg-pane" id="cfgPane">'+cfgSectionHTML()+'</div>'+
-    '</div>'+
-    '<div class="cfg-save">'+
-      `<button class="btn edit" id="cfgSave">${setup?"この内容で始める":"設定を保存"}</button>`+
-      (setup?"":'<button class="btn ghost" id="cfgReset">編集を取り消す</button>')+
-      (dirtyCount?`<span class="cfg-dirtynote">● 未保存の変更が ${dirtyCount} 箇所あります</span>`:"")+
-      '<span class="cfg-err" id="cfgErr"></span>'+
+      '<div id="cfgPane">'+cfgSectionHTML()+'</div>'+
+      '<div class="cfg-save">'+
+        `<button class="btn edit" id="cfgSave">${setup?"この内容で始める":"設定を保存"}</button>`+
+        (setup?"":'<button class="btn ghost" id="cfgReset">編集を取り消す</button>')+
+        (dirtyCount?`<span class="cfg-dirtynote">● 未保存の変更が ${dirtyCount} 箇所あります</span>`:"")+
+        '<span class="cfg-err" id="cfgErr"></span>'+
+      '</div>'+
     '</div>';
   bindCfg();
 }
@@ -1007,98 +1124,107 @@ function renderCfgPane(){renderCfg();}
 function cfgSectionHTML(){
   const e2=x=>esc(x==null?"":String(x));
   const gl=Array.from({length:Math.max(1,Math.min(6,+CFGD.gradeCount||4))},(_,i)=>i+1);
-  if(CFG_SEC==="school")return `
-    <div class="cfg-h">学校名</div>
-    <div class="cfg-hint">画面の見出しや印刷、書き出すファイル名に使います。略称は画面上部に表示されます。</div>
-    <div class="cfg-grid">
-      <div class="cfg-f"><label>正式名称</label><input type="text" id="cfgSchoolName" value="${e2(CFGD.schoolName)}" placeholder="例：○○専門学校"></div>
-      <div class="cfg-f"><label>略称（画面表示用）</label><input type="text" id="cfgSchoolShort" value="${e2(CFGD.schoolShort)}" placeholder="例：○○"></div>
-    </div>`;
-  if(CFG_SEC==="grade")return `
-    <div class="cfg-h">学年・学期</div>
-    <div class="cfg-hint">学年の数と、学期の呼び方を決めます。学期名は画面の切り替えボタンと印刷の見出しに使われます。</div>
-    <div class="cfg-grid">
-      <div class="cfg-f"><label>学年の数</label><select id="cfgGradeCount">${[1,2,3,4,5,6].map(n=>`<option value="${n}"${(+CFGD.gradeCount||4)===n?" selected":""}>1年〜${n}年（${n}学年）</option>`).join("")}</select></div>
-      <div class="cfg-f"><label>前半の学期名</label><input type="text" id="cfgTermEarly" value="${e2(CFGD.termNames.early)}" placeholder="前期"></div>
-      <div class="cfg-f"><label>後半の学期名</label><input type="text" id="cfgTermLate" value="${e2(CFGD.termNames.late)}" placeholder="後期"></div>
-    </div>`;
-  if(CFG_SEC==="days")return `
-    <div class="cfg-h">授業のある曜日</div>
-    <div class="cfg-hint">クリックで切り替えます。選んだ曜日が、選んだ順ではなく下の並び順で表に並びます。</div>
-    <div class="cfg-toggles">${DAY_ALL.map(d=>`<div class="cfg-tg${(CFGD.days||[]).indexOf(d)!==-1?" on":""}" data-day="${d}">${d}</div>`).join("")}</div>`;
-  if(CFG_SEC==="periods")return `
-    <div class="cfg-h">時限と時刻</div>
-    <div class="cfg-hint">上から順に1限・2限…になります。矢印で並び替えると番号も振り直されます。時刻は表と印刷に表示されます。</div>
-    <table class="cfg-ptable" id="cfgPeriods">
-      <thead><tr><th style="width:60px">時限</th><th>開始</th><th>終了</th><th style="width:96px"></th></tr></thead>
+  const card=(title,desc,body)=>`<div class="fcard"><div class="fcard-t">${title}</div>`+
+    (desc?`<div class="fcard-d">${desc}</div>`:"")+body+`</div>`;
+
+  if(CFG_SEC==="school")return card("学校名",
+    "画面の見出しや印刷、書き出すファイル名に使われます。略称は画面上部に表示されます。",
+    `<div class="ff"><label>正式名称</label><input type="text" id="cfgSchoolName" value="${e2(CFGD.schoolName)}" placeholder="例：○○専門学校"></div>
+     <div class="ff"><label>略称（画面表示用）</label><input type="text" id="cfgSchoolShort" value="${e2(CFGD.schoolShort)}" placeholder="例：○○"></div>`);
+
+  if(CFG_SEC==="grade")return card("学年・学期",
+    "学年の数と、学期の呼び方を決めます。学期名は画面の切り替えボタンと印刷の見出しに使われます。",
+    `<div class="ff"><label>学年の数</label><select id="cfgGradeCount">${[1,2,3,4,5,6].map(n=>`<option value="${n}"${(+CFGD.gradeCount||4)===n?" selected":""}>1年〜${n}年（${n}学年）</option>`).join("")}</select></div>
+     <div class="ff-row">
+       <div class="ff"><label>前半の学期名</label><input type="text" id="cfgTermEarly" value="${e2(CFGD.termNames.early)}" placeholder="前期"></div>
+       <div class="ff"><label>後半の学期名</label><input type="text" id="cfgTermLate" value="${e2(CFGD.termNames.late)}" placeholder="後期"></div>
+     </div>`);
+
+  if(CFG_SEC==="days")return card("授業のある曜日",
+    "クリックで選び／解除します。選んだ曜日が時間割の表に並びます。",
+    `<div class="cfg-toggles">${DAY_ALL.map(d=>`<div class="cfg-tg${(CFGD.days||[]).indexOf(d)!==-1?" on":""}" data-day="${d}">${d}</div>`).join("")}</div>`);
+
+  if(CFG_SEC==="periods")return card("時限と時刻",
+    "上から順に1限・2限…になります。矢印で並び替えると番号は振り直されます。時刻は表と印刷に表示されます。",
+    `<table class="cfg-ptable" id="cfgPeriods">
+      <thead><tr><th style="width:58px">時限</th><th>開始</th><th>終了</th><th style="width:104px"></th></tr></thead>
       <tbody>${(CFGD.periods||[]).map((p,i)=>`
         <tr data-i="${i}">
           <td class="pn">${i+1}限</td>
           <td><input type="time" class="p-start" value="${e2(p.start)}"></td>
           <td><input type="time" class="p-end" value="${e2(p.end)}"></td>
           <td style="text-align:right;white-space:nowrap">
-            <button class="rc-mv" data-mv="period" data-i="${i}" data-d="-1" title="上へ">▲</button>
-            <button class="rc-mv" data-mv="period" data-i="${i}" data-d="1" title="下へ">▼</button>
-            <button class="rc-x" data-del="period" data-i="${i}" title="削除">×</button>
+            <button class="iconbtn" data-mv="period" data-i="${i}" data-d="-1" title="上へ">▲</button>
+            <button class="iconbtn" data-mv="period" data-i="${i}" data-d="1" title="下へ">▼</button>
+            <button class="iconbtn dg" data-del="period" data-i="${i}" title="削除">✕</button>
           </td>
         </tr>`).join("")}</tbody>
-    </table>
-    <button class="cfg-add" data-add="period">＋ 時限を追加</button>`;
-  if(CFG_SEC==="courses")return `
-    <div class="cfg-h">コース（学科・専攻）</div>
-    <div class="cfg-hint">時間割を分ける単位です。色を選ぶと、下のプレビューで時間割の見出しの見え方をその場で確認できます。並び順は画面のボタンの並びに反映されます。</div>
-    <div id="cfgCourses">${(CFGD.courses||[]).map((c,i)=>{
-      const t=courseTheme(c.color);const used=courseUseCount(c.key);
+     </table>
+     <button class="cfg-add" data-add="period">＋　時限を追加</button>`);
+
+  if(CFG_SEC==="courses"){
+    const cards=(CFGD.courses||[]).map((c,i)=>{
+      const t=courseTheme(c.color),used=courseUseCount(c.key);
       return `
-      <div class="cfg-card" data-key="${e2(c.key)}">
-        <div class="cfg-card-head" style="background:${t.head};color:${t.headText}">
+      <div class="ccard" data-key="${e2(c.key)}">
+        <div class="ccard-head" style="background:${t.head};color:${t.headText}">
           <span class="ch-name">${e2(c.short||"（名称未設定）")}</span>
-          ${used?`<span style="font-size:.72rem;opacity:.85;font-weight:600">授業 ${used}件</span>`:""}
-          <button data-mv="course" data-i="${i}" data-d="-1" title="上へ">▲</button>
-          <button data-mv="course" data-i="${i}" data-d="1" title="下へ">▼</button>
-          <button data-del="course" data-key="${e2(c.key)}" title="削除">×</button>
+          ${used?`<span class="ch-cnt">授業 ${used}件</span>`:""}
+          <button class="iconbtn" data-mv="course" data-i="${i}" data-d="-1" title="上へ">▲</button>
+          <button class="iconbtn" data-mv="course" data-i="${i}" data-d="1" title="下へ">▼</button>
+          <button class="iconbtn" data-del="course" data-key="${e2(c.key)}" title="削除">✕</button>
         </div>
-        <div class="cfg-card-body">
-          <div class="cfg-f"><label>表示名（短い名前）</label><input type="text" class="c-short" value="${e2(c.short)}" placeholder="例：ホテル"></div>
-          <div class="cfg-f"><label>正式名称（印刷用）</label><input type="text" class="c-full" value="${e2(c.full)}" placeholder="例：ホテル学科（3年制）"></div>
-          <div class="cfg-f"><label>色</label><input type="color" class="c-color" value="${e2(c.color||"#0B6E8F")}" style="height:38px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff"></div>
-          <div class="cfg-f"><label>URLキー（配布リンク用）</label><input type="text" class="c-url" value="${e2(c.urlKey||"")}" placeholder="hotel"></div>
-          <div class="cfg-f span2"><label>対象の学年</label>
-            <div class="cfg-toggles">${gl.map(g=>`<div class="cfg-tg c-grade${(c.grades||[]).indexOf(g)!==-1?" on":""}" data-g="${g}" style="padding:5px 12px">${g}年</div>`).join("")}</div>
+        <div class="ccard-body">
+          <div class="ff-row">
+            <div class="ff"><label>表示名（短い名前）</label><input type="text" class="c-short" value="${e2(c.short)}" placeholder="例：ホテル"></div>
+            <div class="ff"><label>正式名称（印刷用）</label><input type="text" class="c-full" value="${e2(c.full)}" placeholder="例：ホテル学科（3年制）"></div>
           </div>
-          <div class="cfg-f span2"><label>時間割の見出しプレビュー</label>
+          <div class="ff-row">
+            <div class="ff"><label>色</label>
+              <div class="swatch"><input type="color" class="c-color" value="${e2(c.color||"#0B6E8F")}"><span>${e2((c.color||"#0B6E8F").toUpperCase())}</span></div>
+            </div>
+            <div class="ff"><label>URLキー（配布リンク用）</label><input type="text" class="c-url" value="${e2(c.urlKey||"")}" placeholder="hotel"></div>
+          </div>
+          <div class="ff"><label>対象の学年</label>
+            <div class="cfg-toggles">${gl.map(g=>`<div class="cfg-tg c-grade${(c.grades||[]).indexOf(g)!==-1?" on":""}" data-g="${g}">${g}年</div>`).join("")}</div>
+          </div>
+          <div class="ff" style="margin-bottom:0"><label>時間割の見出しプレビュー</label>
             <div class="cfg-prev">
               <div class="pv-h" style="background:${t.head};color:${t.headText}">
-                <div style="max-width:58px;background:${t.corner}">時限</div>${(CFGD.days||["月","火"]).slice(0,5).map(d=>`<div>${d}</div>`).join("")}
+                <div class="pv-corner" style="background:${t.corner}">時限</div>${(CFGD.days||["月","火","水"]).slice(0,5).map(d=>`<div>${d}</div>`).join("")}
               </div>
               <div class="pv-b"><div class="pv-side" style="background:${t.side};color:${t.sideText}">1限</div>
                 <div class="pv-cell">授業のマスはこの見え方になります</div></div>
             </div>
           </div>
         </div>
-      </div>`;}).join("")}</div>
-    <button class="cfg-add" data-add="course">＋ コースを追加</button>`;
-  if(CFG_SEC==="rooms")return `
-    <div class="cfg-h">教室</div>
-    <div class="cfg-hint">教室名を入力して Enter で追加します。「特」を押すと特別教室になり、空き教室の一覧で分けて表示されます。× で削除、◀▶ で並び替えできます。</div>
-    <div class="chipbox" id="cfgRooms">
-      ${(CFGD.rooms||[]).map((r,i)=>`
+      </div>`;}).join("");
+    return card("コース（学科・専攻）",
+      "時間割を分ける単位です。色を選ぶと、プレビューで見出しの見え方をその場で確認できます。並び順は画面のボタンの並びに反映されます。",
+      `<div id="cfgCourses">${cards||'<div class="fcard-d" style="margin:0">まだコースがありません。下のボタンから追加してください。</div>'}</div>
+       <button class="cfg-add" data-add="course">＋　コースを追加</button>`);
+  }
+
+  if(CFG_SEC==="rooms")return card("教室",
+    "教室名を入力して Enter で追加します（カンマ区切りでまとめて追加もできます）。「特」で特別教室に切り替わり、空き教室の一覧で分けて表示されます。",
+    `<div class="chipbox" id="cfgRooms">
+      ${(CFGD.rooms||[]).map((r,i)=>{const n=roomUseCount(r.name);return `
         <span class="rchip${r.special?" sp":""}" data-i="${i}">
           <span class="rc-mv" data-mv="room" data-i="${i}" data-d="-1" title="前へ">◀</span>
-          ${e2(r.name)}${roomUseCount(r.name)?`<span style="font-size:.7rem;opacity:.6">${roomUseCount(r.name)}</span>`:""}
+          ${e2(r.name)}${n?`<span class="rc-n">${n}</span>`:""}
           <span class="rc-sp" data-sp="${i}" title="特別教室の切り替え">特</span>
           <span class="rc-mv" data-mv="room" data-i="${i}" data-d="1" title="次へ">▶</span>
           <span class="rc-x" data-del="room" data-i="${i}" title="削除">×</span>
-        </span>`).join("")}
+        </span>`;}).join("")}
       <input type="text" id="cfgRoomInput" placeholder="教室名を入力して Enter">
-    </div>`;
-  if(CFG_SEC==="opts")return `
-    <div class="cfg-h">入力候補</div>
-    <div class="cfg-hint">授業を登録するときに候補として表示されます。1行に1つ書いてください。空のままでも構いません（あとから足せます）。</div>
-    <div class="cfg-grid" style="max-width:none;grid-template-columns:1fr 1fr">
-      <div class="cfg-f"><label>科目名</label><textarea id="cfgSubjects" placeholder="英会話&#10;サービス基礎">${e2((CFGD.subjects||[]).join("\n"))}</textarea></div>
-      <div class="cfg-f"><label>講師名</label><textarea id="cfgTeachers" placeholder="山田 太郎&#10;佐藤 花子">${e2((CFGD.teachers||[]).join("\n"))}</textarea></div>
-    </div>`;
+     </div>`);
+
+  if(CFG_SEC==="opts")return card("入力候補",
+    "授業を登録するときに候補として表示されます。1行に1つ書いてください。空のままでも構いません（あとから足せます）。",
+    `<div class="ff-row">
+      <div class="ff"><label>科目名</label><textarea id="cfgSubjects" placeholder="英会話&#10;サービス基礎">${e2((CFGD.subjects||[]).join("\n"))}</textarea></div>
+      <div class="ff"><label>講師名</label><textarea id="cfgTeachers" placeholder="山田 太郎&#10;佐藤 花子">${e2((CFGD.teachers||[]).join("\n"))}</textarea></div>
+     </div>`);
   return "";
 }
 function cfgMove(arr,i,d){
@@ -1311,13 +1437,14 @@ function saveEarlyEdits(){try{localStorage.setItem("tt_zenki_records_v1",JSON.st
 loadEarlyEdits();
 function earlyEditCount(){return earlyRecords.length;}
 function earlyData(){return earlyRecords;}
-let earlyEditMode=false; // 前期で編集モードがONか
+let earlyEditMode=true; // 旧仕様の名残（前期も常に編集可能）
 
 // 現在データ（学期で切替）
 function classData(){return term==="early"?earlyData():lateRecords;}
 function isLate(){return term==="late";}
 // 編集可能か（後期は常時、前期は編集モードON時）
-function isEditable(){return !VIEWER_MODE&&(term==="late"||(term==="early"&&earlyEditMode));}
+/* 前期・後期とも同じ扱い：編集画面ならどちらも編集できる */
+function isEditable(){return !VIEWER_MODE;}
 
 // ===== ユーティリティ =====
 function esc(s){return (s||"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
@@ -1640,20 +1767,13 @@ const cstate={q:"",grade:null,world:null,day:null,period:null};
 })();
 let worldGroups=[];
 function rebuildWorldChips(){
-  // 前期は実在コース、後期は学年別の全コース（空でも編集できるように）
-  // 学年が選択されていればその学年のコースのみ表示
+  // 前期・後期とも同じ扱い：設定されているコースを常に表示する
+  // （データが空でも選べるようにして、前期・後期それぞれ独立に時間割を組めるようにする）
   let ws;
   if(cstate.grade){
     ws=(OPT.world_by_grade[String(cstate.grade)]||[]).slice();
-    if(!isLate()){
-      // 前期は実データに存在するものだけ
-      const exist=new Set(classData().filter(r=>r.grade===cstate.grade).map(r=>worldShortFull(r.world)));
-      ws=ws.filter(w=>exist.has(worldShortFull(w)));
-    }
-  }else if(isLate()){
-    const all=new Set();Object.values(OPT.world_by_grade).forEach(arr=>arr.forEach(w=>all.add(w)));ws=[...all];
   }else{
-    ws=[...new Set(classData().map(r=>r.world))];
+    const all=new Set();Object.values(OPT.world_by_grade).forEach(arr=>arr.forEach(w=>all.add(w)));ws=[...all];
   }
   worldGroups=[...new Set(ws.map(worldShortFull))];
   worldGroups.sort((a,b)=>{
@@ -1685,18 +1805,15 @@ function renderEditToolbar(){
   const tb=document.getElementById("editToolbar");
   if(VIEWER_MODE){tb.innerHTML="";return;}
   if(!isLate()){
-    // 前期：編集モードのトグルと元に戻す
-    const cnt=earlyEditCount();
-    tb.innerHTML=`<div class="edit-toolbar" style="background:${earlyEditMode?'var(--accent-soft)':'#fff'};border-color:${earlyEditMode?'#cfe6ee':'var(--line)'}">
-      <span class="et-label" style="color:${earlyEditMode?'var(--accent)':'var(--ink-soft)'}">前期${earlyEditMode?' 編集モード':''}</span>
-      <span style="font-size:.82rem;color:var(--ink-soft)">${earlyEditMode?'表のマスをクリックして授業を編集できます。':'前期の内容を直したいときは「編集する」をオンにします。'}${cnt?`（編集 ${cnt} 件）`:''}</span>
-      <button class="btn ${earlyEditMode?'edit':'ghost'}" id="toggleEarlyEdit" style="margin-left:auto">${earlyEditMode?'編集を終了':'編集する'}</button>
-      <button class="btn ghost" id="checkAll">整合チェック</button>
+    // 前期：後期と同じ操作感（常に編集できる）
+    tb.innerHTML=`<div class="edit-toolbar" style="background:var(--accent-soft);border-color:#cfe6ee">
+      <span class="et-label" style="color:var(--accent)">${termLabel("early")}</span>
+      <span style="font-size:.82rem;color:var(--ink-soft)">学年とコースを選ぶと、表のマスをクリックして授業を編集できます。</span>
+      <button class="btn ghost" id="checkAll" style="margin-left:auto">整合チェック</button>
       <button class="btn ok" id="exportEarlyXlsx">Excel出力</button>
       <button class="btn ghost" id="yearMenuBtnE">年度メニュー</button>
       <button class="btn ghost" id="worldUrlBtnE">コースURL一覧</button>
     </div><div id="progressPanel"></div><div id="checkPanel"></div>`;
-    document.getElementById("toggleEarlyEdit").onclick=()=>{earlyEditMode=!earlyEditMode;renderClass();};
     document.getElementById("exportEarlyXlsx").onclick=exportEarlyExcel;
     document.getElementById("checkAll").onclick=()=>{checkOpen=!checkOpen;if(checkOpen)progressOpen=false;renderProgress();renderCheck();};
     const ym=document.getElementById("yearMenuBtnE");if(ym)ym.onclick=openYearMenu;
@@ -1992,92 +2109,6 @@ function printTimetable(kind){
       background:${btnColor};color:#fff;cursor:pointer;margin:0 5px;font-family:inherit}
     .noprint button.sec{background:#fff;color:${btnColor};border:1.5px solid ${btnColor}}
     @media print{body{padding:0}.noprint{display:none}.table-scroll{box-shadow:none}}
-  /* ===== 設定画面（左メニュー＋作業ペイン） ===== */
-  .cfg-wrap{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:start}
-  .cfg-nav{display:flex;flex-direction:column;gap:4px;position:sticky;top:8px}
-  .cfg-nav button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
-    border:1.5px solid transparent;background:transparent;border-radius:10px;padding:10px 12px;
-    font:inherit;font-size:.9rem;font-weight:700;color:var(--ink-soft);cursor:pointer;transition:.12s}
-  .cfg-nav button:hover{background:var(--line-soft)}
-  .cfg-nav button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-  .cfg-nav .nv-sum{margin-left:auto;font-size:.72rem;font-weight:600;opacity:.75}
-  .cfg-nav .nv-dot{width:7px;height:7px;border-radius:50%;background:#E0A800;flex:none;display:none}
-  .cfg-nav button.dirty .nv-dot{display:block}
-  .cfg-pane{min-width:0}
-  .cfg-h{font-size:1.08rem;font-weight:800;color:var(--accent);margin:0 0 4px}
-  .cfg-hint{font-size:.8rem;color:var(--ink-soft);margin-bottom:14px;line-height:1.75}
-  .cfg-grid{display:grid;gap:12px;max-width:520px}
-  .cfg-f{display:flex;flex-direction:column;gap:4px}
-  .cfg-f label{font-size:.76rem;color:var(--ink-soft);font-weight:700}
-  .cfg-f input[type=text],.cfg-f input[type=time],.cfg-f select,.cfg-f textarea{
-    border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:.92rem;background:#fff;color:var(--ink)}
-  .cfg-f input:focus,.cfg-f select:focus,.cfg-f textarea:focus{outline:none;border-color:var(--accent)}
-  .cfg-f textarea{min-height:120px;resize:vertical;line-height:1.6}
-  .cfg-toggles{display:flex;gap:6px;flex-wrap:wrap}
-  .cfg-tg{border:1.5px solid var(--line);border-radius:20px;padding:6px 14px;cursor:pointer;user-select:none;
-    font-size:.85rem;font-weight:700;color:var(--ink-soft);background:#fff;transition:.12s}
-  .cfg-tg.on{background:var(--accent);border-color:var(--accent);color:#fff}
-  .cfg-add{background:var(--accent-soft,#eaf3f7);color:var(--accent);border:1.5px dashed var(--accent);
-    border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:.86rem;width:100%;margin-top:10px}
-  .cfg-add:hover{background:#dceef4}
-  /* 時限：表形式 */
-  .cfg-ptable{width:100%;border-collapse:collapse;font-size:.9rem}
-  .cfg-ptable th{background:var(--line-soft);color:var(--ink-soft);font-size:.75rem;padding:7px 8px;text-align:left;font-weight:700}
-  .cfg-ptable td{border-bottom:1px solid var(--line-soft);padding:6px 8px;vertical-align:middle}
-  .cfg-ptable input[type=time]{border:1.5px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:.88rem}
-  .cfg-ptable .pn{font-weight:800;color:var(--accent);white-space:nowrap}
-  /* コース：カード＋プレビュー */
-  .cfg-card{border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;background:#fff}
-  .cfg-card-head{display:flex;align-items:center;gap:10px;padding:9px 12px;color:#fff;font-weight:800;font-size:.92rem}
-  .cfg-card-head .ch-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .cfg-card-head button{background:rgba(255,255,255,.22);color:#fff;border:none;border-radius:6px;
-    width:26px;height:26px;cursor:pointer;font-size:.8rem;font-weight:700;flex:none}
-  .cfg-card-head button:hover{background:rgba(255,255,255,.36)}
-  .cfg-card-body{padding:12px;display:grid;gap:10px;grid-template-columns:1fr 1fr}
-  .cfg-card-body .span2{grid-column:1/-1}
-  .cfg-prev{border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:.72rem}
-  .cfg-prev .pv-h{display:flex}
-  .cfg-prev .pv-h div{flex:1;padding:5px 4px;text-align:center;font-weight:700}
-  .cfg-prev .pv-b{display:flex}
-  .cfg-prev .pv-b .pv-side{width:58px;padding:6px 4px;text-align:center;font-weight:700}
-  .cfg-prev .pv-b .pv-cell{flex:1;padding:6px 8px;background:#fff;color:var(--ink-soft)}
-  /* 教室：タグ入力 */
-  .chipbox{border:1.5px solid var(--line);border-radius:10px;padding:9px;display:flex;flex-wrap:wrap;gap:6px;background:#fff;min-height:52px}
-  .chipbox:focus-within{border-color:var(--accent)}
-  .rchip{display:inline-flex;align-items:center;gap:6px;border-radius:18px;padding:5px 8px 5px 12px;
-    font-size:.85rem;font-weight:700;background:var(--line-soft);color:var(--ink)}
-  .rchip.sp{background:#F3E9FA;color:#5B3B7A}
-  .rchip .rc-sp{cursor:pointer;font-size:.68rem;opacity:.7;border:1px solid currentColor;border-radius:4px;padding:0 4px}
-  .rchip .rc-x{cursor:pointer;opacity:.55;font-weight:800;padding:0 3px}
-  .rchip .rc-x:hover{opacity:1;color:#8e2a20}
-  .rchip .rc-mv{cursor:pointer;opacity:.45;font-size:.7rem}
-  .rchip .rc-mv:hover{opacity:.9}
-  .chipbox input{border:none;outline:none;font:inherit;font-size:.9rem;flex:1;min-width:120px;padding:5px}
-  /* 保存バー */
-  .cfg-save{display:flex;gap:10px;align-items:center;position:sticky;bottom:0;z-index:5;
-    background:linear-gradient(to top,#fff 72%,rgba(255,255,255,0));padding:16px 0 6px;margin-top:14px;border-top:1px solid var(--line-soft)}
-  .cfg-err{color:#8e2a20;font-size:.85rem;font-weight:700}
-  .cfg-dirtynote{font-size:.8rem;color:#8a6d00;font-weight:700}
-  @media (max-width:760px){
-    .cfg-wrap{grid-template-columns:1fr;gap:12px}
-    .cfg-nav{flex-direction:row;overflow-x:auto;position:static;padding-bottom:4px}
-    .cfg-nav button{width:auto;white-space:nowrap;padding:8px 12px}
-    .cfg-nav .nv-sum{display:none}
-    .cfg-card-body{grid-template-columns:1fr}
-  }
-  .setup-overlay{display:none;position:fixed;inset:0;z-index:9998;background:linear-gradient(160deg,#16323F 0%,#0b2530 100%);overflow:auto;padding:24px}
-  .setup-overlay.show{display:block}
-  .setup-card{max-width:860px;margin:24px auto;background:#fff;border-radius:16px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-  .setup-head{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}
-  .setup-badge{font-family:"Cinzel",serif;letter-spacing:.3em;color:var(--accent);font-weight:700;font-size:.8rem}
-  .setup-head h2{margin:6px 0 8px;font-size:1.5rem;color:var(--ink)}
-  .setup-head p{font-size:.9rem;color:var(--ink-soft);line-height:1.8;margin:0}
-  #yearNotice{display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#1E5B3C 0%,#134129 100%);align-items:center;justify-content:center;padding:24px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #yearNotice .yn-card{max-width:440px;width:100%;background:#fff;border-radius:18px;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)}
-  #yearNotice .yn-badge{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.35em;color:#1E5B3C;font-size:1.1rem;margin-bottom:20px}
-  #yearNotice .yn-title{font-size:1.25rem;font-weight:800;color:#16323F;line-height:1.5;margin-bottom:16px}
-  #yearNotice .yn-msg{font-size:1rem;line-height:1.8;color:#1E5B3C;font-weight:600;margin-bottom:16px}
-  #yearNotice .yn-sub{font-size:.85rem;line-height:1.8;color:#5A6B7A}
   </style></head><body>
   <div class="noprint"><button onclick="window.print()">印刷する</button><button class="sec" onclick="window.close()">閉じる</button></div>
   ${sheets}</body></html>`);
@@ -2133,7 +2164,7 @@ function renderClass(){
         out.innerHTML='<div class="empty"><div class="big">学年とコースを選んでください</div><div>後期の授業をマス目に入力していきます。</div></div>';return;}
       note.innerHTML='<div class="mode-note"><b>後期</b>　学年とコースを選ぶと、後期の週間表を表示します。</div>';
       out.innerHTML='<div class="empty"><div class="big">学年とコースを選んでください</div></div>';return;}
-    if(earlyEditMode){note.innerHTML='<div class="mode-note e"><b>前期 編集モード</b>　学年とコースを選ぶと、編集できる週間表が開きます。</div>';
+    if(isEditable()){note.innerHTML='<div class="mode-note e"><b>'+termLabel("early")+'</b>　学年とコースを選ぶと、編集できる週間表が開きます。</div>';
       out.innerHTML='<div class="empty"><div class="big">学年とコースを選んでください</div></div>';return;}
     note.innerHTML="";out.innerHTML='<div class="empty"><div class="big">該当する授業がありません</div></div>';return;}
   if(gset.size===1&&wset.size===1){
@@ -2481,20 +2512,25 @@ document.getElementById("mDelete").onclick=()=>{
 const pstate={q:"",person:null};
 const STORE_PKEY="tt_kouki_persons_v1";
 const STORE_PREC="tt_kouki_personrecs_v1";
-let latePersons=[],lateP=[];
+const STORE_PREC_E="tt_zenki_personrecs_v1";
+/* 学生の名簿（latePersons）は前期・後期で共通。個別の時間割は学期ごとに持つ（earlyP / lateP）。 */
+let latePersons=[],lateP=[],earlyP=[];
 function loadLateP(){try{const a=localStorage.getItem(STORE_PKEY);if(a)latePersons=JSON.parse(a);
-  const b=localStorage.getItem(STORE_PREC);if(b)lateP=JSON.parse(b);}catch(e){latePersons=[];lateP=[];}}
+  const b=localStorage.getItem(STORE_PREC);if(b)lateP=JSON.parse(b);
+  const c=localStorage.getItem(STORE_PREC_E);if(c)earlyP=JSON.parse(c);}catch(e){latePersons=[];lateP=[];earlyP=[];}}
 function saveLateP(){
   if(!VIEWER_MODE)ensureStudentKeys(); // 学生キーの自動発行（追加・読込のどの経路でも）
   try{localStorage.setItem(STORE_PKEY,JSON.stringify(latePersons));
-  localStorage.setItem(STORE_PREC,JSON.stringify(lateP));}catch(e){}
+  localStorage.setItem(STORE_PREC,JSON.stringify(lateP));
+  localStorage.setItem(STORE_PREC_E,JSON.stringify(earlyP));}catch(e){}
   schedulePush();}
 loadLateP();
-function personRecords(){return isLate()?lateP:PER;}
+/* 表示中の学期の個別時間割 */
+function personRecords(){return isLate()?lateP:earlyP;}
+function setPersonRecords(a){if(isLate())lateP=a;else earlyP=a;}
 function personList(){
   let list;
-  if(isLate())list=latePersons.slice().sort((a,b)=>a.grade-b.grade||a.name.localeCompare(b.name,"ja"));
-  else list=[...new Set(PER.map(r=>r.person))].map(name=>({name,grade:PER.find(r=>r.person===name).grade})).sort((a,b)=>a.grade-b.grade||a.name.localeCompare(b.name,"ja"));
+  list=latePersons.slice().sort((a,b)=>a.grade-b.grade||a.name.localeCompare(b.name,"ja"));
   // 閲覧版の学生用URL：本人だけに制限（後期はサーバーが本人のみ返すが、前期の埋め込みデータも同名のみに絞る）
   if(VIEWER_MODE&&VIEWER_STUDENT_KEY){
     const allowed=new Set((latePersons||[]).map(p=>p.name));
@@ -2635,13 +2671,13 @@ function openStudentModal(name){
     if(!name&&latePersons.some(x=>x.name===nm)){alert("同じ氏名の学生が既にいます");return;}
     if(name){
       const old=latePersons.find(x=>x.name===name);
-      if(nm!==name)lateP.forEach(r=>{if(r.person===name)r.person=nm;});
+      if(nm!==name)[lateP,earlyP].forEach(arr=>arr.forEach(r=>{if(r.person===name)r.person=nm;}));
       old.name=nm;old.grade=selGrade;old.world=selWorld?courseKeyFromShort(worldShortFull(selWorld)):null;pstate.person=nm;
     }else{
       latePersons.push({name:nm,grade:selGrade,world:selWorld?courseKeyFromShort(worldShortFull(selWorld)):null});
       if(selWorld){
-        lateRecords.filter(r=>r.grade===selGrade&&worldShortFull(r.world)===worldShortFull(selWorld)).forEach(r=>{
-          lateP.push({person:nm,grade:selGrade,day:r.day,period:r.period,time:r.time,subject:r.subject,teacher:r.teacher,room:r.room,note:r.note||""});
+        classData().filter(r=>r.grade===selGrade&&worldShortFull(r.world)===worldShortFull(selWorld)).forEach(r=>{
+          personRecords().push({person:nm,grade:selGrade,day:r.day,period:r.period,time:r.time,subject:r.subject,teacher:r.teacher,room:r.room,note:r.note||""});
         });
       }
       pstate.person=nm;
@@ -2650,7 +2686,7 @@ function openStudentModal(name){
   };
   document.getElementById("spDelete").onclick=()=>{
     if(!confirm(`${name} さんと、その時間割データを削除します。よろしいですか？`))return;
-    latePersons=latePersons.filter(x=>x.name!==name);lateP=lateP.filter(r=>r.person!==name);
+    latePersons=latePersons.filter(x=>x.name!==name);lateP=lateP.filter(r=>r.person!==name);earlyP=earlyP.filter(r=>r.person!==name);
     if(pstate.person===name)pstate.person=null;
     saveLateP();rebuildPersonPick();renderPerson();closeStudentModal();
   };
@@ -2688,10 +2724,10 @@ document.getElementById("pcSave").onclick=()=>{
   const data={person:pstate.person,grade:pinfo.grade,day,period,time:PTIME_FULL[period],
     subject:subj,teacher:document.getElementById("pcTeacher").value.trim(),
     room:document.getElementById("pcRoom").value.trim(),note:document.getElementById("pcNote").value.trim()};
-  if(r)Object.assign(r,data);else lateP.push(data);
+  if(r)Object.assign(r,data);else personRecords().push(data);
   saveLateP();renderPerson();closePersonCell();};
 document.getElementById("pcDelete").onclick=()=>{const {day,period}=editingPC;
-  lateP=lateP.filter(r=>!(r.person===pstate.person&&r.day===day&&r.period===period));
+  setPersonRecords(personRecords().filter(r=>!(r.person===pstate.person&&r.day===day&&r.period===period)));
   saveLateP();renderPerson();closePersonCell();};
 
 /* 学生別 Excel / JSON 出力 */
@@ -2997,7 +3033,7 @@ function importPersonJson(){
     }
     if(mode==="replace"){
       latePersons=students.map(s=>({name:String(s.name),grade:+s.grade,world:s.world||null}));
-      lateP=recs.map(normPersonRec);
+      setPersonRecords(recs.map(normPersonRec));
     }else{
       // 学生：氏名キーで上書き
       const smap={};latePersons.forEach(s=>{smap[s.name]=s;});
@@ -3005,7 +3041,7 @@ function importPersonJson(){
       latePersons=Object.values(smap);
       // レコード：person|day|period キーで上書き。読み込んだ学生のレコードは一旦全消し→入れ直し
       const importedNames=new Set(students.map(s=>String(s.name)));
-      lateP=lateP.filter(r=>!importedNames.has(r.person)).concat(recs.map(normPersonRec));
+      setPersonRecords(personRecords().filter(r=>!importedNames.has(r.person)).concat(recs.map(normPersonRec)));
     }
     saveLateP();
     pstate.person=null;rebuildPersonPick();renderPerson();
@@ -3023,9 +3059,9 @@ function setTerm(t){term=t;
   document.getElementById("appHeader").classList.toggle("edit-mode",t==="late");
   document.body.classList.toggle("term-late",t==="late");
   setSaved(t==="late"?(lateRecords.length?`後期データ ${lateRecords.length}コマ`:"後期：未入力"):(earlyEditCount()?`前期 編集 ${earlyEditCount()}件`:""));
-  // 学期で学生別データの母集合が変わるため、選択中の学生はリセット
-  pstate.person=null;
-  earlyEditMode=false; // 学期を切り替えたら前期編集モードはオフに戻す
+  // 名簿は学期共通のため、選択中の学生はそのまま保つ（在籍していなければ解除）
+  if(pstate.person&&!personList().some(p=>p.name===pstate.person))pstate.person=null;
+  // 前期・後期とも常に編集できるため、モードの切り替えは不要
   rebuildWorldChips();rebuildPersonPick();
   rstate.room=null;
   rebuildRoomPick();
@@ -3064,7 +3100,7 @@ function openYearMenu(){
 }
 function closeYearMenu(){const ov=document.getElementById("yearMenu");if(ov)ov.classList.remove("show");}
 function ymExport(){
-  const data={year:schoolYear,earlyRecords,lateRecords,latePersons,lateP,exportedAt:new Date().toISOString()};
+  const data={year:schoolYear,config:CFG,earlyRecords,lateRecords,latePersons,lateP,earlyP,exportedAt:new Date().toISOString()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
   a.download=brandFile()+"時間割_"+schoolYear+"年度_"+new Date().toLocaleDateString("ja-JP").replace(/\//g,"")+".json";a.click();
@@ -3083,7 +3119,7 @@ function ymNewYear(copy){
   }else{
     earlyRecords=[];lateRecords=[];
   }
-  latePersons=[];lateP=[];
+  latePersons=[];lateP=[];earlyP=[];   // 学生別は引き継がず、新年度で登録し直す
   schoolYear=next;saveYearLocal();
   // ローカル保存
   try{
@@ -3091,6 +3127,7 @@ function ymNewYear(copy){
     localStorage.setItem(STORE_KEY,JSON.stringify(lateRecords));
     localStorage.setItem(STORE_PKEY,JSON.stringify(latePersons));
     localStorage.setItem(STORE_PREC,JSON.stringify(lateP));
+    localStorage.setItem(STORE_PREC_E,JSON.stringify(earlyP));
   }catch(e){}
   updateYearBadge();renderAll();closeYearMenu();
   schedulePush(); // サーバーへ反映
@@ -3110,6 +3147,7 @@ function ymImport(){
         lateRecords=Array.isArray(d.lateRecords)?d.lateRecords:[];
         latePersons=Array.isArray(d.latePersons)?d.latePersons:[];
         lateP=Array.isArray(d.lateP)?d.lateP:[];
+    earlyP=Array.isArray(d.earlyP)?d.earlyP:[];
         try{
           localStorage.setItem("tt_zenki_records_v1",JSON.stringify(earlyRecords));
           localStorage.setItem(STORE_KEY,JSON.stringify(lateRecords));
@@ -3200,7 +3238,7 @@ async function serverLoad(silent){
       if(Array.isArray(j.earlyRecords))earlyRecords=j.earlyRecords; // 前期もサーバー管理
       earlyEdits=j.earlyEdits||{};
       if(typeof j.year==="number"){schoolYear=j.year;saveYearLocal();}
-      latePersons=j.latePersons||[];lateP=j.lateP||[];
+      latePersons=j.latePersons||[];lateP=j.lateP||[];earlyP=j.earlyP||[];
       serverUpdatedAt=j.updatedAt||null;
       updateYearBadge();
       // 編集画面：キー未発行の学生がいれば発行してサーバーに反映
@@ -3316,7 +3354,7 @@ async function doPush(){
   if(!tok){setSaved("⚠ サーバー未保存（未認証）");
     showEditGate("編集内容を保存するには、パスワードを入力してください。");return;}
   try{
-    const body={year:schoolYear,config:CFG,lateRecords,earlyRecords,latePersons,lateP,baseUpdatedAt:serverUpdatedAt};
+    const body={year:schoolYear,config:CFG,lateRecords,earlyRecords,latePersons,lateP,earlyP,baseUpdatedAt:serverUpdatedAt};
     const r=await fetch(API_URL,{method:"PUT",
       headers:{"Content-Type":"application/json","x-edit-token":tok},
       body:JSON.stringify(body)});
