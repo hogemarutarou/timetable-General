@@ -591,6 +591,8 @@
     .ff-row{grid-template-columns:1fr;gap:16px}
   }
   /* 年度案内・準備中の全画面表示 */
+  .pub-badge{display:inline-flex;align-items:center;gap:5px;background:#F5A623;color:#3D2B00;
+    font-size:.74rem;font-weight:800;padding:4px 10px;border-radius:12px;letter-spacing:.02em;white-space:nowrap}
   #yearNotice{display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#1E5B3C 0%,#134129 100%);align-items:center;justify-content:center;padding:24px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   #yearNotice .yn-card{max-width:440px;width:100%;background:#fff;border-radius:18px;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)}
   #yearNotice .yn-badge{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.35em;color:#1E5B3C;font-size:1.1rem;margin-bottom:20px}
@@ -616,10 +618,11 @@
     <button id="termEarly" class="on">前期</button>
     <button id="termLate">後期</button>
   </div>
+  <span class="pub-badge" id="pubBadge" style="display:none"></span>
   <span class="integ-badge" id="integBadge" style="display:none"></span>
   <button class="btn ghost btn-sm" id="syncReloadBtn" style="display:none;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4)">最新に更新</button>
   <span class="viewer-tag" id="viewerTag" style="display:none">閲覧版</span>
-  <span class="app-ver">汎用v1</span>
+  <span class="app-ver">汎用v2</span>
   <span class="now" id="nowLabel"></span>
   <span class="saved" id="savedLabel"></span>
 </div></header>
@@ -911,6 +914,30 @@ function defaultCFG(){return{
   configured:false
 };}
 let CFG=defaultCFG();
+/* 学期ごとの公開設定。false のときは閲覧者に時間割を見せない（サーバー側でもデータを返さない）。
+   未設定は「公開」とみなし、これまでの動きを変えない。 */
+let PUBLISHED={early:true,late:true};
+function isPublished(tm){return PUBLISHED[tm||term]!==false;}
+/* 公開・非公開を切り替える */
+function togglePublish(){
+  const tm=term,t=termLabel(tm),now=isPublished(tm);
+  const msg=now
+    ? `${t}の時間割を「準備中」にします。\n\n・学生や教職員には表示されなくなります（データも送られません）\n・編集画面ではこれまでどおり編集できます\n\n準備中にしますか？`
+    : `${t}の時間割を「公開」します。\n\n・学生や教職員が見られるようになります\n\n公開しますか？`;
+  if(!confirm(msg))return;
+  PUBLISHED[tm]=!now;
+  renderClass();renderPerson();
+  schedulePush();
+  setSaved(t+(PUBLISHED[tm]?"を公開しました":"を準備中にしました"));
+}
+/* 編集画面のヘッダーに「準備中」の目印を出す */
+function updatePublishBadge(){
+  const el=document.getElementById("pubBadge");
+  if(!el)return;
+  if(VIEWER_MODE||isPublished()){el.style.display="none";return;}
+  el.style.display="";
+  el.textContent="準備中（学生には非表示）";
+}
 /* 既存コードが参照する変数群。CFGから毎回組み立てる（識別子は従来のまま） */
 let OPT={subjects:[],teachers:[],rooms:[],rooms_clean:[],world_by_grade:{}};
 let ROOMS=[],SPECIAL_ROOMS=[],DAYS=[],PERIODS=[],WORLD_ORDER=[];
@@ -1872,6 +1899,7 @@ function renderEditToolbar(){
       <button class="btn ok" id="exportEarlyXlsx">Excel出力</button>
       <button class="btn ghost" id="yearMenuBtnE">年度メニュー</button>
       <button class="btn ghost" id="worldUrlBtnE">コースURL一覧</button>
+      <button class="btn ghost" id="pub_early">${isPublished("early")?"学生に公開中 ▸ 準備中にする":"準備中 ▸ 学生に公開する"}</button>
       <button class="btn danger-ghost" id="resetEarly">${esc(termLabel("early"))}データを消去</button>
     </div><div id="progressPanel"></div><div id="checkPanel"></div>`;
     document.getElementById("exportEarlyXlsx").onclick=exportEarlyExcel;
@@ -1880,6 +1908,7 @@ function renderEditToolbar(){
     document.getElementById("checkAll").onclick=()=>{checkOpen=!checkOpen;if(checkOpen)progressOpen=false;renderProgress();renderCheck();};
     const ym=document.getElementById("yearMenuBtnE");if(ym)ym.onclick=openYearMenu;
     const wu=document.getElementById("worldUrlBtnE");if(wu)wu.onclick=exportWorldUrls;
+    const pe=document.getElementById("pub_early");if(pe)pe.onclick=togglePublish;
     const re_=document.getElementById("resetEarly");
     if(re_)re_.onclick=()=>{
       const t=termLabel("early");
@@ -1898,9 +1927,11 @@ function renderEditToolbar(){
     <button class="btn ok" id="exportXlsx">Excel出力</button>
     <button class="btn ghost" id="yearMenuBtnL">年度メニュー</button>
     <button class="btn ghost" id="worldUrlBtnL">コースURL一覧</button>
-    <button class="btn danger-ghost" id="resetLate">${esc(termLabel("late"))}データを消去</button>
+    <button class="btn ghost" id="pub_late">${isPublished("late")?"学生に公開中 ▸ 準備中にする":"準備中 ▸ 学生に公開する"}</button>
+      <button class="btn danger-ghost" id="resetLate">${esc(termLabel("late"))}データを消去</button>
   </div><div id="progressPanel"></div><div id="checkPanel"></div>`;
   document.getElementById("exportXlsx").onclick=exportExcel;
+  const pl=document.getElementById("pub_late");if(pl)pl.onclick=togglePublish;
   document.getElementById("resetLate").onclick=()=>{
     const t=termLabel("late");
     if(confirm(t+"に登録したデータをすべて消去します。\n（学生別の個別時間割は消えません）\n\nこの操作は元に戻せません。よろしいですか？")){
@@ -2211,7 +2242,20 @@ function printTimetable(kind){
   w.document.close();
 }
 
+/* 閲覧画面で、その学期がまだ公開されていないときの案内 */
+function notPublishedHTML(){
+  return '<div class="empty"><div class="big">'+esc(termLabel(term))+'の時間割は準備中です</div>'+
+    '<div>公開されるまで、しばらくお待ちください。</div></div>';
+}
 function renderClass(){
+  // 閲覧画面：未公開の学期は中身を見せない
+  if(VIEWER_MODE&&!isPublished()){
+    const note=document.getElementById("classNote"),out=document.getElementById("classOut");
+    if(note)note.innerHTML="";
+    if(out)out.innerHTML=notPublishedHTML();
+    return;
+  }
+  updatePublishBadge();
   const q=normQ(cstate.q).trim();
   renderEditToolbar();
   updateIntegBadge();
@@ -2705,7 +2749,13 @@ function renderPersonToolbar(){
   document.getElementById("printPersonAll").onclick=()=>{if(!latePersons.length){alert("学生が登録されていません");return;}printTimetable("person-all");};
   document.getElementById("resetLateP").onclick=()=>{if(confirm("後期の学生別データ（学生と時間割）をすべて消去します。よろしいですか？")){latePersons=[];lateP=[];saveLateP();pstate.person=null;rebuildPersonPick();renderPerson();}};
 }
-function renderPerson(){const q=normQ(pstate.q).trim();
+function renderPerson(){
+  if(VIEWER_MODE&&!isPublished()){
+    const out=document.getElementById("personOut");
+    if(out)out.innerHTML=notPublishedHTML();
+    return;
+  }
+  const q=normQ(pstate.q).trim();
   renderPersonToolbar();
   document.querySelectorAll("#personPick .pbtn").forEach(b=>b.classList.toggle("on",b.dataset.name===pstate.person));
   const note=document.getElementById("personNote"),out=document.getElementById("personOut");
@@ -3162,6 +3212,7 @@ function setTerm(t){term=t;
   // 名簿は学期共通のため、選択中の学生はそのまま保つ（在籍していなければ解除）
   if(pstate.person&&!personList().some(p=>p.name===pstate.person))pstate.person=null;
   // 前期・後期とも常に編集できるため、モードの切り替えは不要
+  updatePublishBadge();
   rebuildWorldChips();rebuildPersonPick();
   rstate.room=null;
   rebuildRoomPick();
@@ -3251,7 +3302,7 @@ function openYearMenu(){
 }
 function closeYearMenu(){const ov=document.getElementById("yearMenu");if(ov)ov.classList.remove("show");}
 function ymExport(){
-  const data={year:schoolYear,config:CFG,earlyRecords,lateRecords,latePersons,lateP,earlyP,exportedAt:new Date().toISOString()};
+  const data={year:schoolYear,config:CFG,published:PUBLISHED,earlyRecords,lateRecords,latePersons,lateP,earlyP,exportedAt:new Date().toISOString()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
   a.download=brandFile()+"時間割_"+schoolYear+"年度_"+new Date().toLocaleDateString("ja-JP").replace(/\//g,"")+".json";a.click();
@@ -3271,6 +3322,7 @@ function ymNewYear(copy){
     earlyRecords=[];lateRecords=[];
   }
   latePersons=[];lateP=[];earlyP=[];   // 学生別は引き継がず、新年度で登録し直す
+  PUBLISHED={early:false,late:false};  // 新年度は準備中から始める（整ったら公開する）
   schoolYear=next;saveYearLocal();
   // ローカル保存
   try{
@@ -3295,6 +3347,9 @@ function ymImport(){
         if(!confirm("読み込んだデータで現在の内容を置き換えます。よろしいですか？"))return;
         if(typeof d.year==="number"){schoolYear=d.year;saveYearLocal();}
         // 書き出したJSONに設定が入っていれば、それも復元する
+        if(d.published&&typeof d.published==="object"){
+          PUBLISHED={early:d.published.early!==false,late:d.published.late!==false};
+        }
         if(d.config&&typeof d.config==="object"){
           CFG=Object.assign(defaultCFG(),d.config);
           applyCFG();applyBranding();rebuildFromCFG();saveCfgLocal();
@@ -3381,6 +3436,9 @@ async function serverLoad(silent){
     if(j&&j.exists){
       // サーバーに保存された設定（学校名・コース・教室など）を反映する
       if(j.config&&typeof j.config==="object"){CFG=Object.assign(defaultCFG(),j.config);saveCfgLocal();}
+      if(j.published&&typeof j.published==="object"){
+        PUBLISHED={early:j.published.early!==false,late:j.published.late!==false};
+      }
       applyCFG();applyBranding();rebuildFromCFG();setupTabVisibility();
       if(!CFG.configured){
         if(VIEWER_MODE){showNotConfiguredNotice();return;}
@@ -3511,7 +3569,7 @@ async function doPush(){
   if(!tok){setSaved("⚠ サーバー未保存（未認証）");
     showEditGate("編集内容を保存するには、パスワードを入力してください。");return;}
   try{
-    const body={year:schoolYear,config:CFG,lateRecords,earlyRecords,latePersons,lateP,earlyP,baseUpdatedAt:serverUpdatedAt};
+    const body={year:schoolYear,config:CFG,published:PUBLISHED,lateRecords,earlyRecords,latePersons,lateP,earlyP,baseUpdatedAt:serverUpdatedAt};
     const r=await fetch(API_URL,{method:"PUT",
       headers:{"Content-Type":"application/json","x-edit-token":tok},
       body:JSON.stringify(body)});
